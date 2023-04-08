@@ -4,7 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +22,12 @@ public class TransactionRepository {
 		populateData();
 	}
 	
+	
+	public List<Transaction> sortDates(){
+		Comparator<Transaction> byDate = Comparator.comparing(transaction -> transaction.getDate());
+		Collections.sort(transactions, byDate);
+		return transactions;
+	}
 	public List<Transaction> findAll () {
 		return transactions;
 	}
@@ -31,6 +40,12 @@ public class TransactionRepository {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} 
+		sortDates();
 		
+	}
+
+
+	public Transaction findById(Integer transactionId) {
+		return transactions.get(transactionId);
 	}
 }
