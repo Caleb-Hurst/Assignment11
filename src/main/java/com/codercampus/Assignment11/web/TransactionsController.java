@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codercampus.Assignment11.domain.Transaction;
 import com.codercampus.Assignment11.service.TransactionService;
@@ -27,10 +27,15 @@ public class TransactionsController {
 		return "transactions";
 	}
 	
-	@GetMapping("transaction")
-	public String getTransaction(@PathVariable Integer transactionId, ModelMap model) {		
+	@GetMapping("transaction.html")
+	public String getTransaction(@RequestParam Long transactionId, ModelMap model) {	
+		System.out.println(transactionId);
 	Transaction transaction = service.findById(transactionId);
-	model.put("transactionId", transaction);
+	model.put("date", transaction.getDate());
+	model.put("amount", transaction.getAmount());
+	model.put("transactionId", transactionId);
+	model.put("description", transaction.getDescription());
+	model.put("type", transaction.getType());
 	return "transaction";
 }
 }

@@ -22,7 +22,7 @@ public class TransactionService {
 		return transactionRepo.findAll();
 	}
 
-	public Transaction findById(Integer transactionId) {
+	public Transaction findById(Long transactionId) {
 		return transactionRepo.findById(transactionId);
 	}
 

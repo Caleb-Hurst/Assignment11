@@ -1,10 +1,21 @@
 <html xmlns:th="http://thymeleaf.org">
 
 <head>
+
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
-<body>
-asdfasdfasdfasdfasdfasdf
+<h2>Transaction ID:
+  <span th:text="${transactionId}"></span>
+  <span th:if="${type == 'D'}" th:text="'(Debit)'"></span>
+  <span th:if="${type == 'C'}" th:text="'(Credit)'"></span>
+</h2><body>
+<div>
+<p th:text="'Date: ' + ${date}"></p>
+<p th:text="'Amount: ' + ${amount}"></p>
+<p th:text="'Description: ' + ${description}"></p>
+<a href="/transactions"><button>back</button></a>
+
+</div>
 </body>
 </html>
